@@ -18,6 +18,8 @@ CREATE_NEW_CONSOLE    = 0x00000010
 PROCESS_ALL_ACCESS    = 0x001F0FFF
 INFINITE              = 0xFFFFFFFF
 DBG_CONTINUE          = 0x00010002
+DBG_EXCEPTION_HANDLED = 0x00010001 
+DBG_EXCEPTION_NOT_HANDLED = 0x80010001    
 
 
 # Debug event constants
@@ -138,11 +140,18 @@ class EXCEPTION_DEBUG_INFO(Structure):
         ("dwFirstChance",      DWORD),
         ]
 
+class CREATE_THREAD_DEBUG_INFO(Structure):
+    _fields_ = [
+        ("hThread", DWORD),
+        ("lpThreadLocalBase", DWORD),
+        ("lpStartAddress", DWORD),
+        ]
+        
 # it populates this union appropriately
 class DEBUG_EVENT_UNION(Union):
     _fields_ = [
         ("Exception",         EXCEPTION_DEBUG_INFO),
-#        ("CreateThread",      CREATE_THREAD_DEBUG_INFO),
+        ("CreateThread",      CREATE_THREAD_DEBUG_INFO),
 #        ("CreateProcessInfo", CREATE_PROCESS_DEBUG_INFO),
 #        ("ExitThread",        EXIT_THREAD_DEBUG_INFO),
 #        ("ExitProcess",       EXIT_PROCESS_DEBUG_INFO),

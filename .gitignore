@@ -21,3 +21,8 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+*.pyc
+hidepydbg/Debug
+*.plg
+*.ncb
+*.opt
